@@ -9,6 +9,7 @@ export type IpLocation = {
   country: string | null;
   countryCode: string | null;
   region: string | null;
+  postal: string | null;
   city: string | null;
   latitude: number | null;
   longitude: number | null;
@@ -83,6 +84,7 @@ const blank = (ip: string): IpLocation => ({
   country: null,
   countryCode: null,
   region: null,
+  postal: null,
   city: null,
   latitude: null,
   longitude: null,
@@ -117,6 +119,7 @@ export function fromIpwhois(ip: string, body: unknown): IpLocation {
     country: str(b.country),
     countryCode: code ? code.toUpperCase() : null,
     region: str(b.region),
+    postal: str(b.postal),
     city: str(b.city),
     latitude: num(b.latitude),
     longitude: num(b.longitude),

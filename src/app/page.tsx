@@ -13,7 +13,8 @@ const chipOff = "border-line bg-white hover:border-ink/30";
 const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 function place(r: IpLocation): string {
-  return [r.city, r.region !== r.city ? r.region : null, r.country].filter(Boolean).join(", ");
+  const city = [r.postal, r.city].filter(Boolean).join(" ");
+  return [city, r.region !== r.city ? r.region : null, r.country].filter(Boolean).join(", ");
 }
 
 export default async function HomePage({ searchParams }: PageProps<"/">) {
@@ -160,7 +161,7 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
                       <th>Network</th>
                       <th>Time zone</th>
                       <th>
-                        <span className="sr-only">Map</span>
+                        <span className="sr-only">Approximate area on a map</span>
                       </th>
                     </tr>
                   </thead>
@@ -190,12 +191,12 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
                         <td className="text-right">
                           {r.latitude !== null && r.longitude !== null && (
                             <a
-                              href={`https://www.openstreetmap.org/?mlat=${r.latitude}&mlon=${r.longitude}#map=11/${r.latitude}/${r.longitude}`}
+                              href={`https://www.openstreetmap.org/?mlat=${r.latitude}&mlon=${r.longitude}#map=12/${r.latitude}/${r.longitude}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-sm font-medium underline-offset-4 hover:underline"
                             >
-                              Map
+                              Approx. area
                             </a>
                           )}
                         </td>
@@ -206,8 +207,9 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
               </div>
             )}
             <p className="border-t border-line px-5 py-3 text-xs text-muted">
-              Locations come from ipwho.is and are approximate: usually right for the country, often the nearest large city for mobile and business
-              networks, and the VPN exit for VPN users.
+              Locations come from ipwho.is and are approximate. An IP address shows where the internet provider registered it, not the building or
+              street the person is in: usually right for the country, often the nearest large city for mobile and business networks, and the VPN exit
+              for VPN users. The map pin marks the centre of that area, not an address.
             </p>
           </Card>
         </>

@@ -2,7 +2,7 @@ import "server-only";
 import { failedLocation, fromIpwhois, isReservedIp, privateLocation, type IpLocation } from "@/lib/ip-geo";
 
 const ENDPOINT = "https://ipwho.is/";
-const FIELDS = "success,message,country,country_code,region,city,latitude,longitude,timezone,connection";
+const FIELDS = "success,message,country,country_code,region,city,postal,latitude,longitude,timezone,connection";
 const TTL_MS = 24 * 60 * 60 * 1000;
 const CONCURRENCY = 5;
 
